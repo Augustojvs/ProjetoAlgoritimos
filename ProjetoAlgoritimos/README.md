@@ -1,3 +1,0 @@
-# ProjetoAlgoritimos
-# ProjetoAlgoritimos
-# ProjetoAlgoritimos

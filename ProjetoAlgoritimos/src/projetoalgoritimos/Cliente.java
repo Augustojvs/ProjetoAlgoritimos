@@ -8,6 +8,10 @@ public class Cliente {
     private String nome;
     private String endereco;
     
+    
+    public Cliente(){
+    }
+    
     public Cliente(String nome, int codigo, String endereco)
     {
         this.codigo = codigo;
@@ -40,8 +44,13 @@ public class Cliente {
         this.endereco = endereco;
     }
     
+     public String toString()
+    {
+        return getCodigo() + " " + getNome() + " " + getEndereco();
+    }
+    /*
     public String toString()
     {
         return "Código: " + getCodigo() + " - Nome: " + getNome() + " - Endereço: " + getEndereco();
-    }
+    }*/
 }

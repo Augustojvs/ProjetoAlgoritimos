@@ -1,95 +1,127 @@
 package projetoalgoritimos;
 
+import javax.swing.JOptionPane;
 
 public class Lista {
+
     private Tipono primeiro, ultimo, anterior, proximo, posAtual;
-    
-    public Lista(){
+
+    public Lista() {
         primeiro = ultimo = null;
     }
-    public boolean vazia(){
+
+    public boolean vazia() {
         return primeiro == null;
     }
-    public void inserirNoInicio(String nome, int codigo, String endereco){
+
+    public void inserirNoInicio(String nome, int codigo, String endereco) {
         Tipono no = new Tipono(nome, codigo, endereco);
         no.proximo = primeiro;
         if (vazia()) {
             ultimo = no;
-        }else{
+        } else {
             primeiro.anterior = no;
         }
+        JOptionPane.showMessageDialog(null, "Cliente Inserido com Sucesso!");
         primeiro = no;
+        //this.imprimir();
     }
-    public void inserirNoFim(String nome, int codigo, String endereco){
+
+    public void inserirNoFim(String nome, int codigo, String endereco) {
         Tipono no = new Tipono(nome, codigo, endereco);
         if (vazia()) {
             primeiro = no;
-        }else{
+        } else {
             no.anterior = ultimo;
             ultimo.proximo = no;
         }
         ultimo = no;
     }
-    public void inserirOrdenado(String nome, int codigo, String endereco){
+
+    public void inserirOrdenado(String nome, int codigo, String endereco) {
         Tipono aux, ant, no;
         no = new Tipono(nome, codigo, endereco);
         aux = primeiro;
         ant = ultimo;
-        while ((aux != null) && aux.item.getCodigo() < codigo){
+        while ((aux != null) && aux.item.getCodigo() < codigo) {
             ant = aux;
             aux = aux.proximo;
         }
         if (ant == null) {
             primeiro = no;
-        }else{
+        } else {
             ant.proximo = no;
             no.proximo = aux;
         }
         if (aux == null) {
             ultimo = no;
         }
-       
+
     }
-    public Cliente primeiro()
-    {
+
+    public Cliente primeiro() {
         posAtual = primeiro;
         return posAtual.item;
     }
-    
-    public Cliente ultimo()
-    {
-        if (vazia())
-            return null;
 
-        posAtual = ultimo ;
+    public Cliente ultimo() {
+        if (vazia()) {
+            return null;
+        }
+
+        posAtual = ultimo;
         return posAtual.item;
     }
-    
-    public Cliente proximo()
-    {
+
+    public Cliente proximo() {
         posAtual = posAtual.proximo;
         return posAtual.item;
     }
-    
-    public Cliente anterior()
-    {
+
+    public Cliente anterior() {
         posAtual = posAtual.anterior;
         return posAtual.item;
     }
-    public Cliente posicaoAtual(){
-        
+
+    public Cliente posicaoAtual() {
+
         return posAtual.item;
     }
-    
-    void imprimir(){
-        if(vazia()){
+
+    void imprimir() {
+        if (vazia()) {
             System.out.println("Lista vazia");
-        }else{
+        } else {
             Tipono aux = primeiro;
-            while(aux != null){
+            while (aux != null) {
                 System.out.println("Produtos: " + aux);
                 aux = aux.proximo;
             }
         }
+    }
+
+    void exportarLista() {
+        Arquivo a = new Arquivo("file.txt");
+        a.abrirArquivo();
+        if (vazia()) {
+            System.out.println("Lista vazia");
+        } else {
+            Tipono aux = primeiro;
+            while (aux != null) {
+                a.gravarCliente(aux.toString());
+                aux = aux.proximo;
+            }
+            a.fecharArquivo();
+        }
+        JOptionPane.showMessageDialog(null, "Lista exportada com sucesso!");
+    }
+
+    void importarLista() {
+        Arquivo a = new Arquivo("file.txt");
+        a.abrirArquivo();
+        a.lerRegistros();
+        a.fecharArquivo();
+        JOptionPane.showMessageDialog(null, "Lista importada com sucesso!");
+        this.imprimir();
     }
 }

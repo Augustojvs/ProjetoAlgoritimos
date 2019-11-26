@@ -1,5 +1,6 @@
 package projetoalgoritimos;
 
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class frmLista extends javax.swing.JFrame {
@@ -110,20 +111,19 @@ public class frmLista extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nome", "Endereço"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
 
         btnSalvar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnSalvar.setText("Carregar Lista");
-        btnSalvar.setActionCommand("Carregar Lista");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
@@ -191,47 +191,44 @@ public class frmLista extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
+                .addGap(163, 163, 163)
+                .addComponent(jButtonPrimeiro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonAnterior)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonProximo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonUltimo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldCodigo)
-                                    .addComponent(jTextFieldNome)
-                                    .addComponent(jTextFieldEndereco)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jTextFieldEndereco1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnPesquisar)
-                                .addGap(8, 8, 8))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(99, 99, 99)
-                                        .addComponent(jButtonPrimeiro)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButtonAnterior)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButtonProximo)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButtonUltimo))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(btnSalvar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnSalvar1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButtonInserir1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnExcluir)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                            .addComponent(jTextFieldCodigo)
+                            .addComponent(jTextFieldNome)
+                            .addComponent(jTextFieldEndereco)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jTextFieldEndereco1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPesquisar)
+                        .addGap(8, 8, 8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSalvar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonInserir1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExcluir)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -253,9 +250,9 @@ public class frmLista extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExcluir)
                     .addComponent(jButtonInserir1)
@@ -317,8 +314,11 @@ public class frmLista extends javax.swing.JFrame {
         codigo = Integer.parseInt(jTextFieldCodigo.getText());
         endereco = jTextFieldEndereco.getText();
 
-        l.inserirNoInicio(nome, codigo, endereco);
-        
+        l.inserirNoFim(nome, codigo, endereco);
+        jButtonProximo.setEnabled(true);
+        jButtonUltimo.setEnabled(true);
+        jButtonPrimeiro.setEnabled(true);
+        jButtonAnterior.setEnabled(true);
         jTextFieldNome.setText("");
         jTextFieldCodigo.setText("");
         jTextFieldEndereco.setText("");
@@ -326,8 +326,20 @@ public class frmLista extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonInserir1ActionPerformed
 
     private void jButtonUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUltimoActionPerformed
-        // TODO add your handling code here:
+        
+    if(l.vazia()){
+        jButtonProximo.setEnabled(false);
+        jButtonUltimo.setEnabled(false);
+        jButtonPrimeiro.setEnabled(false);
+        jButtonAnterior.setEnabled(false);
+        JOptionPane.showMessageDialog(rootPane, "Erro ao exibir dados!");
+    }else{
         exibeProduto(l.ultimo());
+        jButtonProximo.setEnabled(false);
+        jButtonUltimo.setEnabled(false);
+        jButtonPrimeiro.setEnabled(true);
+        jButtonAnterior.setEnabled(true);
+    }
     }//GEN-LAST:event_jButtonUltimoActionPerformed
 
     public void exibeProduto(Cliente p) {
@@ -344,18 +356,59 @@ public class frmLista extends javax.swing.JFrame {
 
     }
     private void jButtonPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrimeiroActionPerformed
-        // TODO add your handling code here:
+
+    if(l.vazia()){
+        jButtonProximo.setEnabled(false);
+        jButtonUltimo.setEnabled(false);
+        jButtonPrimeiro.setEnabled(false);
+        jButtonAnterior.setEnabled(false);
+        JOptionPane.showMessageDialog(rootPane, "Erro ao exibir dados!");
+    }else{
         exibeProduto(l.primeiro());
+        jButtonPrimeiro.setEnabled(false);
+        jButtonAnterior.setEnabled(false);
+        jButtonProximo.setEnabled(true);
+        jButtonUltimo.setEnabled(true);
+    }
+
     }//GEN-LAST:event_jButtonPrimeiroActionPerformed
 
     private void jButtonAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnteriorActionPerformed
-        // TODO add your handling code here:
+         
+    if(l.vazia()){
+        jButtonProximo.setEnabled(false);
+        jButtonUltimo.setEnabled(false);
+        jButtonPrimeiro.setEnabled(false);
+        jButtonAnterior.setEnabled(false);
+        JOptionPane.showMessageDialog(rootPane, "Erro ao exibir dados!");
+    }else{
         exibeProduto(l.anterior());
+        jButtonProximo.setEnabled(true);
+        jButtonUltimo.setEnabled(true);
+        if(l.getAnterior() == null){
+            jButtonPrimeiro.setEnabled(false);
+            jButtonAnterior.setEnabled(false);
+        }
+    }
     }//GEN-LAST:event_jButtonAnteriorActionPerformed
 
     private void jButtonProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProximoActionPerformed
-        // TODO add your handling code here:
+       
+    if(l.vazia()){
+        jButtonProximo.setEnabled(false);
+        jButtonUltimo.setEnabled(false);
+        jButtonPrimeiro.setEnabled(false);
+        jButtonAnterior.setEnabled(false);
+        JOptionPane.showMessageDialog(rootPane, "Erro ao exibir dados!");
+    }else{
         exibeProduto(l.proximo());
+        jButtonPrimeiro.setEnabled(true);
+        jButtonAnterior.setEnabled(true);
+        if(l.getProximo() == null){
+            jButtonProximo.setEnabled(false);
+            jButtonUltimo.setEnabled(false);
+        }
+    }
     }//GEN-LAST:event_jButtonProximoActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed

@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 public class Lista {
 
-    private Tipono primeiro, ultimo, anterior, proximo, posAtual;
+    private Tipono primeiro, ultimo, posAtual;
 
     public Lista() {
         primeiro = ultimo = null;
@@ -35,6 +35,7 @@ public class Lista {
             no.anterior = ultimo;
             ultimo.proximo = no;
         }
+        JOptionPane.showMessageDialog(null, "Cliente Inserido com Sucesso!");
         ultimo = no;
     }
 
@@ -65,20 +66,22 @@ public class Lista {
     }
 
     public Cliente ultimo() {
-        if (vazia()) {
-            return null;
-        }
-
         posAtual = ultimo;
         return posAtual.item;
     }
 
     public Cliente proximo() {
+        if (posAtual == ultimo) {
+            return null;
+        }
         posAtual = posAtual.proximo;
         return posAtual.item;
     }
 
     public Cliente anterior() {
+        if (posAtual == primeiro) {
+            return null;
+        }
         posAtual = posAtual.anterior;
         return posAtual.item;
     }
@@ -86,6 +89,36 @@ public class Lista {
     public Cliente posicaoAtual() {
 
         return posAtual.item;
+    }
+    
+    public Cliente getProximo(){
+        return posAtual.proximo.item;
+    }
+    public Cliente getAnterior(){
+        return posAtual.anterior.item;
+    }
+    
+    public Cliente excluir(int codigo){
+        Tipono aux = primeiro;
+        while(aux != null && aux.item.codigo != codigo){
+            aux = aux.proximo;
+        }
+        if (aux == null) {
+            JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
+        }
+        if (aux == primeiro) {
+            primeiro = aux.proximo;
+            if (aux == ultimo) {
+                ultimo = null;
+            }
+        }else if (aux == ultimo) {
+            ultimo = aux.anterior;
+            ultimo.proximo = null;
+        }else{
+            aux.anterior.proximo = aux.proximo;
+            aux.proximo.anterior = aux.anterior;
+        }
+        return aux.item;
     }
 
     void imprimir() {

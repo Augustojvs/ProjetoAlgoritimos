@@ -2,6 +2,7 @@ package projetoalgoritimos;
 
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class frmLista extends javax.swing.JFrame {
 
@@ -34,7 +35,7 @@ public class frmLista extends javax.swing.JFrame {
         btnPesquisar = new javax.swing.JButton();
         jTextFieldEndereco1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        TabelaPrincipal = new javax.swing.JTable();
         btnSalvar = new javax.swing.JButton();
         btnSalvar1 = new javax.swing.JButton();
         jButtonInserir1 = new javax.swing.JButton();
@@ -109,18 +110,15 @@ public class frmLista extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaPrincipal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "Nome", "Endereço"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(TabelaPrincipal);
 
         btnSalvar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnSalvar.setText("Carregar Lista");
@@ -315,6 +313,11 @@ public class frmLista extends javax.swing.JFrame {
         endereco = jTextFieldEndereco.getText();
 
         l.inserirNoFim(nome, codigo, endereco);
+
+        DefaultTableModel dtmCliente = (DefaultTableModel) TabelaPrincipal.getModel();
+        Object[] dados = {codigo, nome, endereco};
+        dtmCliente.addRow(dados);
+
         jButtonProximo.setEnabled(true);
         jButtonUltimo.setEnabled(true);
         jButtonPrimeiro.setEnabled(true);
@@ -326,20 +329,20 @@ public class frmLista extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonInserir1ActionPerformed
 
     private void jButtonUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUltimoActionPerformed
-        
-    if(l.vazia()){
-        jButtonProximo.setEnabled(false);
-        jButtonUltimo.setEnabled(false);
-        jButtonPrimeiro.setEnabled(false);
-        jButtonAnterior.setEnabled(false);
-        JOptionPane.showMessageDialog(rootPane, "Erro ao exibir dados!");
-    }else{
-        exibeProduto(l.ultimo());
-        jButtonProximo.setEnabled(false);
-        jButtonUltimo.setEnabled(false);
-        jButtonPrimeiro.setEnabled(true);
-        jButtonAnterior.setEnabled(true);
-    }
+
+        if (l.vazia()) {
+            jButtonProximo.setEnabled(false);
+            jButtonUltimo.setEnabled(false);
+            jButtonPrimeiro.setEnabled(false);
+            jButtonAnterior.setEnabled(false);
+            JOptionPane.showMessageDialog(rootPane, "Erro ao exibir dados!");
+        } else {
+            exibeProduto(l.ultimo());
+            jButtonProximo.setEnabled(false);
+            jButtonUltimo.setEnabled(false);
+            jButtonPrimeiro.setEnabled(true);
+            jButtonAnterior.setEnabled(true);
+        }
     }//GEN-LAST:event_jButtonUltimoActionPerformed
 
     public void exibeProduto(Cliente p) {
@@ -357,66 +360,80 @@ public class frmLista extends javax.swing.JFrame {
     }
     private void jButtonPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrimeiroActionPerformed
 
-    if(l.vazia()){
-        jButtonProximo.setEnabled(false);
-        jButtonUltimo.setEnabled(false);
-        jButtonPrimeiro.setEnabled(false);
-        jButtonAnterior.setEnabled(false);
-        JOptionPane.showMessageDialog(rootPane, "Erro ao exibir dados!");
-    }else{
-        exibeProduto(l.primeiro());
-        jButtonPrimeiro.setEnabled(false);
-        jButtonAnterior.setEnabled(false);
-        jButtonProximo.setEnabled(true);
-        jButtonUltimo.setEnabled(true);
-    }
+        if (l.vazia()) {
+            jButtonProximo.setEnabled(false);
+            jButtonUltimo.setEnabled(false);
+            jButtonPrimeiro.setEnabled(false);
+            jButtonAnterior.setEnabled(false);
+            JOptionPane.showMessageDialog(rootPane, "Erro ao exibir dados!");
+        } else {
+            exibeProduto(l.primeiro());
+            jButtonPrimeiro.setEnabled(false);
+            jButtonAnterior.setEnabled(false);
+            jButtonProximo.setEnabled(true);
+            jButtonUltimo.setEnabled(true);
+        }
 
     }//GEN-LAST:event_jButtonPrimeiroActionPerformed
 
     private void jButtonAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnteriorActionPerformed
-         
-    if(l.vazia()){
-        jButtonProximo.setEnabled(false);
-        jButtonUltimo.setEnabled(false);
-        jButtonPrimeiro.setEnabled(false);
-        jButtonAnterior.setEnabled(false);
-        JOptionPane.showMessageDialog(rootPane, "Erro ao exibir dados!");
-    }else{
-        exibeProduto(l.anterior());
-        jButtonProximo.setEnabled(true);
-        jButtonUltimo.setEnabled(true);
-        if(l.getAnterior() == null){
+
+        if (l.vazia()) {
+            jButtonProximo.setEnabled(false);
+            jButtonUltimo.setEnabled(false);
             jButtonPrimeiro.setEnabled(false);
             jButtonAnterior.setEnabled(false);
+            JOptionPane.showMessageDialog(rootPane, "Erro ao exibir dados!");
+        } else {
+            exibeProduto(l.anterior());
+            jButtonProximo.setEnabled(true);
+            jButtonUltimo.setEnabled(true);
+            if (l.getAnterior() == null) {
+                jButtonPrimeiro.setEnabled(false);
+                jButtonAnterior.setEnabled(false);
+            }
         }
-    }
     }//GEN-LAST:event_jButtonAnteriorActionPerformed
 
     private void jButtonProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProximoActionPerformed
-       
-    if(l.vazia()){
-        jButtonProximo.setEnabled(false);
-        jButtonUltimo.setEnabled(false);
-        jButtonPrimeiro.setEnabled(false);
-        jButtonAnterior.setEnabled(false);
-        JOptionPane.showMessageDialog(rootPane, "Erro ao exibir dados!");
-    }else{
-        exibeProduto(l.proximo());
-        jButtonPrimeiro.setEnabled(true);
-        jButtonAnterior.setEnabled(true);
-        if(l.getProximo() == null){
+
+        if (l.vazia()) {
             jButtonProximo.setEnabled(false);
             jButtonUltimo.setEnabled(false);
+            jButtonPrimeiro.setEnabled(false);
+            jButtonAnterior.setEnabled(false);
+            JOptionPane.showMessageDialog(rootPane, "Erro ao exibir dados!");
+        } else {
+            exibeProduto(l.proximo());
+            jButtonPrimeiro.setEnabled(true);
+            jButtonAnterior.setEnabled(true);
+            if (l.getProximo() == null) {
+                jButtonProximo.setEnabled(false);
+                jButtonUltimo.setEnabled(false);
+            }
         }
-    }
     }//GEN-LAST:event_jButtonProximoActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        int codigo = Integer.parseInt(jTextFieldCodigo.getText());
+        l.excluir(codigo);
+        JOptionPane.showMessageDialog(null, "Cliente código " + codigo + " removido com suceso!");
+        
+        jButtonProximo.setEnabled(true);
+        jButtonUltimo.setEnabled(true);
+        jButtonPrimeiro.setEnabled(true);
+        jButtonAnterior.setEnabled(true);
+        jTextFieldNome.setText("");
+        jTextFieldCodigo.setText("");
+        jTextFieldEndereco.setText("");
+
+        l.imprimir();
+
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         l.importarLista();
+
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar1ActionPerformed
@@ -479,6 +496,7 @@ public class frmLista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TabelaPrincipal;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSalvar;
@@ -496,7 +514,6 @@ public class frmLista extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JTextField jTextFieldEndereco;
     private javax.swing.JTextField jTextFieldEndereco1;

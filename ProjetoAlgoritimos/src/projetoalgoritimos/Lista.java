@@ -100,6 +100,7 @@ public class Lista {
     
     public Cliente excluir(int codigo){
         Tipono aux = primeiro;
+        System.out.println(codigo);
         while(aux != null && aux.item.codigo != codigo){
             aux = aux.proximo;
         }
@@ -132,6 +133,21 @@ public class Lista {
             }
         }
     }
+    
+    
+    /*public Object creatObject(){
+        Object dados[] = new Object[10];
+        if (vazia()) {
+            System.out.println("Lista vazia");
+        } else {
+            Tipono aux = primeiro;
+            while (aux != null) {
+                dados[i] = {aux.getCodigo(),aux.getNome(),aux.getEndereco()};
+                aux = aux.proximo;
+            }
+        }
+        return dados;
+    } */
 
     void exportarLista() {
         Arquivo a = new Arquivo("file.txt");
@@ -141,7 +157,7 @@ public class Lista {
         } else {
             Tipono aux = primeiro;
             while (aux != null) {
-                a.gravarCliente(aux.toString());
+                a.gravarCliente(aux.getCodigo(),aux.getNome(), aux.getEndereco());
                 aux = aux.proximo;
             }
             a.fecharArquivo();
@@ -151,9 +167,9 @@ public class Lista {
 
     void importarLista() {
         Arquivo a = new Arquivo("file.txt");
-        a.abrirArquivo();
-        a.lerRegistros();
-        a.fecharArquivo();
+        a.openFile();
+        a.lerRegistros(this);
+        a.closeFile();
         JOptionPane.showMessageDialog(null, "Lista importada com sucesso!");
         this.imprimir();
     }

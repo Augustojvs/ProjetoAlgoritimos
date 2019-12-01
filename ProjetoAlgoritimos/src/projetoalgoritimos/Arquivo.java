@@ -38,31 +38,32 @@ public class Arquivo {
             System.exit(1);
         }// fim do catch		
     }
+    
+    public void closeFile() {
+        entrada.close();
+    }
 
     public void fecharArquivo() {
         saida.close();
     }
 
-    public void lerRegistros() {
-        try // Lê os registros no arquivo utilizado
+    public void lerRegistros(Lista l) {
+        try
         {
-            Cliente c = new Cliente();
-            System.out.format("%-10s%-12s%-12s\n", "Codigo", "Nome", "Endereço");
-
             while (entrada.hasNext()) {
-                c.setCodigo(entrada.nextInt());
-                c.setNome(entrada.next());
-                c.setEndereco(entrada.next());
-                System.out.format("%-10s%-12s%-12s\n", c.getCodigo(), c.getNome(), c.getEndereco());
-            } // fim do while
-        } // fim do try lê registros ...
+                int codigo = entrada.nextInt();
+                String nome = entrada.next();
+                String end = entrada.next();
+                l.inserirNoInicio(nome,codigo,end);
+            }
+        }
         catch (Exception minhaExcecao) {
             System.err.println("Erro ao ler o arquivo\n" + minhaExcecao);
             System.exit(1);
-        } // fim do catch
+        }
     }
 
-    public void gravarCliente(String cliente) {
-        saida.format("%s\n", cliente);
+    public void gravarCliente(int codigo, String nome, String endereco) {
+        saida.format("%d %s %s\n", codigo, nome, endereco);
     }
 }

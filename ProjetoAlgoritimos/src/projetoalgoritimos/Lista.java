@@ -35,7 +35,6 @@ public class Lista {
             no.anterior = ultimo;
             ultimo.proximo = no;
         }
-        JOptionPane.showMessageDialog(null, "Cliente Inserido com Sucesso!");
         ultimo = no;
     }
 
@@ -84,7 +83,6 @@ public class Lista {
     }
     
     public Cliente buscarCliente(int codigo) {
-        System.out.println("buscando código");
         if(primeiro == null){
             return null;
         }
@@ -101,7 +99,6 @@ public class Lista {
     }
     
     public Cliente buscarCliente(String nome) {
-        System.out.println("buscando nome");
         if(primeiro == null){
             return null;
         }
@@ -146,6 +143,11 @@ public class Lista {
     public Cliente posicaoAtual() {
 
         return posAtual.item;
+    }
+    
+    public Tipono getPosAtual() {
+
+        return posAtual;
     }
     
     public Cliente getProximo(){
@@ -210,14 +212,14 @@ public class Lista {
             }
             a.fecharArquivo();
         }
-        JOptionPane.showMessageDialog(null, "Lista exportada com sucesso!");
     }
 
-    void importarLista() {
+    public Cliente importarLista() {
         Arquivo a = new Arquivo("file.txt");
         a.openFile();
-        a.lerRegistros(this);
+        Cliente c = a.lerRegistros(this);
         a.closeFile();
         JOptionPane.showMessageDialog(null, "Lista importada com sucesso!");
+        return c;
     }
 }

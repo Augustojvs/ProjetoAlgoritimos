@@ -8,6 +8,7 @@ package projetoalgoritimos;
 import java.io.File;
 import java.util.Formatter;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class Arquivo {
 
@@ -47,7 +48,7 @@ public class Arquivo {
         saida.close();
     }
 
-    public void lerRegistros(Lista l) {
+    public Cliente lerRegistros(Lista l) {
         try
         {
             l.esvaziar();
@@ -57,13 +58,11 @@ public class Arquivo {
                 String end = entrada.next();
                 l.inserirNoFim(nome,codigo,end);
             }
+            return l.primeiro();
         }
         catch (Exception minhaExcecao) {
             System.err.println("Erro ao ler o arquivo\n" + minhaExcecao);
-            System.exit(1);
-        }
-        finally {
-            l.primeiro();
+            return null;
         }
     }
 

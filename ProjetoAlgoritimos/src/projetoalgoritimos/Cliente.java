@@ -7,16 +7,18 @@ public class Cliente {
     private int codigo;
     private String nome;
     private String endereco;
+    private String categoria;
     
     
     public Cliente(){
     }
     
-    public Cliente(String nome, int codigo, String endereco)
+    public Cliente(String nome, int codigo, String endereco, String categoria)
     {
         this.codigo = codigo;
         this.nome  = nome;
         this.endereco = endereco;
+        this.categoria = categoria;
     }
 
 
@@ -46,11 +48,14 @@ public class Cliente {
     
      public String toString()
     {
-        return getCodigo() + " " + getNome() + " " + getEndereco();
+        return getCodigo() + " " + getNome() + " " + getEndereco() + " " + getCategoria();
     }
-    /*
-    public String toString()
-    {
-        return "Código: " + getCodigo() + " - Nome: " + getNome() + " - Endereço: " + getEndereco();
-    }*/
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 }

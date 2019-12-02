@@ -7,8 +7,8 @@ public class Tipono {
     Tipono anterior;
     Tipono posAtual;
 
-    public Tipono(String nome, int codigo, String endereco) {
-        item = new Cliente(nome, codigo, endereco);
+    public Tipono(String nome, int codigo, String endereco, String categoria) {
+        item = new Cliente(nome, codigo, endereco, categoria);
         proximo = anterior = null;
     }
 
@@ -27,6 +27,10 @@ public class Tipono {
 
     public String getEndereco() {
         return item.getEndereco();
+    }
+    
+    public String getCategoria() {
+        return item.getCategoria();
     }
 
 }

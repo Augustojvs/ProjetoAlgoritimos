@@ -14,8 +14,8 @@ public class Lista {
         return primeiro == null;
     }
 
-    public void inserirNoInicio(String nome, int codigo, String endereco) {
-        Tipono no = new Tipono(nome, codigo, endereco);
+    public void inserirNoInicio(String nome, int codigo, String endereco, String categoria) {
+        Tipono no = new Tipono(nome, codigo, endereco, categoria);
         no.proximo = primeiro;
         if (vazia()) {
             ultimo = no;
@@ -27,8 +27,8 @@ public class Lista {
         //this.imprimir();
     }
 
-    public void inserirNoFim(String nome, int codigo, String endereco) {
-        Tipono no = new Tipono(nome, codigo, endereco);
+    public void inserirNoFim(String nome, int codigo, String endereco, String categoria) {
+        Tipono no = new Tipono(nome, codigo, endereco, categoria);
         if (vazia()) {
             primeiro = no;
         } else {
@@ -38,9 +38,9 @@ public class Lista {
         ultimo = no;
     }
 
-    public void inserirOrdenado(String nome, int codigo, String endereco) {
+    public void inserirOrdenado(String nome, int codigo, String endereco, String categoria) {
         Tipono aux, ant, no;
-        no = new Tipono(nome, codigo, endereco);
+        no = new Tipono(nome, codigo, endereco, categoria);
         aux = primeiro;
         ant = ultimo;
         while ((aux != null) && aux.item.getCodigo() < codigo) {
@@ -207,7 +207,7 @@ public class Lista {
         } else {
             Tipono aux = primeiro;
             while (aux != null) {
-                a.gravarCliente(aux.getCodigo(),aux.getNome(), aux.getEndereco());
+                a.gravarCliente(aux.getCodigo(),aux.getNome(), aux.getEndereco(), aux.getCategoria());
                 aux = aux.proximo;
             }
             a.fecharArquivo();

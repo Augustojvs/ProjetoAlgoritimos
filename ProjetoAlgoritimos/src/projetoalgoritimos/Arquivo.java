@@ -56,7 +56,8 @@ public class Arquivo {
                 int codigo = entrada.nextInt();
                 String nome = entrada.next();
                 String end = entrada.next();
-                l.inserirNoFim(nome,codigo,end);
+                String cat = entrada.next();
+                l.inserirNoFim(nome,codigo,end,cat);
             }
             return l.primeiro();
         }
@@ -66,7 +67,7 @@ public class Arquivo {
         }
     }
 
-    public void gravarCliente(int codigo, String nome, String endereco) {
-        saida.format("%d %s %s\n", codigo, nome, endereco);
+    public void gravarCliente(int codigo, String nome, String endereco, String categoria) {
+        saida.format("%d %s %s %s\n", codigo, nome, endereco, categoria);
     }
 }

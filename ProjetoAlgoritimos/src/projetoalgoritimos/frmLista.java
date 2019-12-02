@@ -43,6 +43,8 @@ public class frmLista extends javax.swing.JFrame {
         jButtonProximo = new javax.swing.JButton();
         jButtonAnterior = new javax.swing.JButton();
         jButtonPrimeiro = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jComboCategoria = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -114,7 +116,7 @@ public class frmLista extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "Endereço"
+                "ID", "Nome", "Endereço", "Categoria"
             }
         ));
         jScrollPane2.setViewportView(TabelaPrincipal);
@@ -183,25 +185,24 @@ public class frmLista extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel4.setText("Categoria");
+
+        jComboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ouro", "prata", "bronze" }));
+        jComboCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboCategoriaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(jButtonPrimeiro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonAnterior)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonProximo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonUltimo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,22 +212,39 @@ public class frmLista extends javax.swing.JFrame {
                             .addComponent(jTextFieldCodigo)
                             .addComponent(jTextFieldNome)
                             .addComponent(jTextFieldEndereco)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jTextFieldEndereco1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPesquisar)
                         .addGap(8, 8, 8))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnCarregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSalvar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonInserir1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExcluir)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(3, 3, 3)
+                                .addComponent(jComboCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnCarregar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSalvar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonInserir1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnExcluir)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(162, 162, 162)
+                .addComponent(jButtonPrimeiro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonAnterior)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonProximo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonUltimo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,6 +266,12 @@ public class frmLista extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(0, 6, Short.MAX_VALUE))
+                    .addComponent(jComboCategoria))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -261,7 +285,7 @@ public class frmLista extends javax.swing.JFrame {
                     .addComponent(jButtonAnterior)
                     .addComponent(jButtonProximo)
                     .addComponent(jButtonUltimo))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -307,15 +331,17 @@ public class frmLista extends javax.swing.JFrame {
         String nome;
         int codigo;
         String endereco;
+        String categoria;
         nome = jTextFieldNome.getText();
         codigo = Integer.parseInt(jTextFieldCodigo.getText());
         endereco = jTextFieldEndereco.getText();
+        categoria = jComboCategoria.getSelectedItem().toString();
 
-        l.inserirNoFim(nome, codigo, endereco);
+        l.inserirNoFim(nome, codigo, endereco, categoria);
         JOptionPane.showMessageDialog(null, "Cliente Inserido com Sucesso!");
 
         DefaultTableModel dtmCliente = (DefaultTableModel) TabelaPrincipal.getModel();
-        Object[] dados = {codigo, nome, endereco};
+        Object[] dados = {codigo, nome, endereco, categoria};
         dtmCliente.addRow(dados);
 
         jButtonProximo.setEnabled(true);
@@ -350,9 +376,11 @@ public class frmLista extends javax.swing.JFrame {
             String nome = p.getNome();
             int codigo = p.getCodigo();
             String endereco = p.getEndereco();
+            String categoria = p.getCategoria();
             jTextFieldNome.setText(nome);
             jTextFieldCodigo.setText(Integer.toString(codigo));
             jTextFieldEndereco.setText(endereco);
+            jComboCategoria.setSelectedItem(categoria);
         } else {
             JOptionPane.showMessageDialog(rootPane, "posição inválida");
         }
@@ -459,7 +487,7 @@ public class frmLista extends javax.swing.JFrame {
         Tipono aux = l.getPosAtual();
         boolean hasNext = true;
         while(hasNext){
-            Object[] dados = {aux.getCodigo(), aux.getNome(), aux.getEndereco()};
+            Object[] dados = {aux.getCodigo(), aux.getNome(), aux.getEndereco(), aux.getCategoria()};
             dtmCliente.addRow(dados);
             if(aux.proximo == null){
                 hasNext = false;
@@ -498,6 +526,10 @@ public class frmLista extends javax.swing.JFrame {
     private void jTextFieldEndereco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEndereco1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldEndereco1ActionPerformed
+
+    private void jComboCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -545,9 +577,11 @@ public class frmLista extends javax.swing.JFrame {
     private javax.swing.JButton jButtonPrimeiro;
     private javax.swing.JButton jButtonProximo;
     private javax.swing.JButton jButtonUltimo;
+    private javax.swing.JComboBox<String> jComboCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

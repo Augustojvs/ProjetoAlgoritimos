@@ -50,16 +50,20 @@ public class Arquivo {
     public void lerRegistros(Lista l) {
         try
         {
+            l.esvaziar();
             while (entrada.hasNext()) {
                 int codigo = entrada.nextInt();
                 String nome = entrada.next();
                 String end = entrada.next();
-                l.inserirNoInicio(nome,codigo,end);
+                l.inserirNoFim(nome,codigo,end);
             }
         }
         catch (Exception minhaExcecao) {
             System.err.println("Erro ao ler o arquivo\n" + minhaExcecao);
             System.exit(1);
+        }
+        finally {
+            l.primeiro();
         }
     }
 

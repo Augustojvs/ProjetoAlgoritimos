@@ -4,7 +4,7 @@ package projetoalgoritimos;
 
 public class Cliente {
     
-    public int codigo;
+    private int codigo;
     private String nome;
     private String endereco;
     

@@ -59,6 +59,63 @@ public class Lista {
         }
 
     }
+    
+    public Cliente localizarItem(String str) {
+        int length = str.length();
+        boolean buscaCodigo = true;
+        int i = 0;
+        if (str.charAt(0) == '-') {
+            if (length == 1) {
+                return null;
+            }
+            i = 1;
+        }
+        for (; i < length; i++) {
+            char c = str.charAt(i);
+            if (c < '0' || c > '9') {
+                buscaCodigo = false;
+            }
+        }
+        if(buscaCodigo){
+            return buscarCliente(Integer.parseInt(str));
+        } else {
+            return buscarCliente(str);
+        }
+    }
+    
+    public Cliente buscarCliente(int codigo) {
+        System.out.println("buscando código");
+        if(primeiro == null){
+            return null;
+        }
+        Tipono aux = primeiro;
+        while(aux.item.getCodigo() != codigo){
+            if (aux == ultimo) {
+                return null;
+            }
+            aux = aux.proximo;
+        }
+        posAtual = aux;
+        
+        return posAtual.item;
+    }
+    
+    public Cliente buscarCliente(String nome) {
+        System.out.println("buscando nome");
+        if(primeiro == null){
+            return null;
+        }
+        Tipono aux = primeiro;
+        while(!aux.item.getNome().equalsIgnoreCase(nome)){
+            if (aux == ultimo) {
+                return null;
+            }
+            aux = aux.proximo;
+        }
+        posAtual = aux;
+        
+        return posAtual.item;
+    }
 
     public Cliente primeiro() {
         posAtual = primeiro;
@@ -92,20 +149,22 @@ public class Lista {
     }
     
     public Cliente getProximo(){
+        if(posAtual.proximo == null){
+            return null;
+        }
         return posAtual.proximo.item;
     }
     public Cliente getAnterior(){
+        if(posAtual.anterior == null){
+            return null;
+        }
         return posAtual.anterior.item;
     }
     
-    public Cliente excluir(int codigo){
+    public Cliente excluir(){
         Tipono aux = primeiro;
-        System.out.println(codigo);
-        while(aux != null && aux.item.codigo != codigo){
+        while(aux.item.getCodigo() != posAtual.getCodigo()){
             aux = aux.proximo;
-        }
-        if (aux == null) {
-            JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
         }
         if (aux == primeiro) {
             primeiro = aux.proximo;
@@ -134,20 +193,9 @@ public class Lista {
         }
     }
     
-    
-    /*public Object creatObject(){
-        Object dados[] = new Object[10];
-        if (vazia()) {
-            System.out.println("Lista vazia");
-        } else {
-            Tipono aux = primeiro;
-            while (aux != null) {
-                dados[i] = {aux.getCodigo(),aux.getNome(),aux.getEndereco()};
-                aux = aux.proximo;
-            }
-        }
-        return dados;
-    } */
+    void esvaziar() {
+        primeiro = ultimo = null;
+    }
 
     void exportarLista() {
         Arquivo a = new Arquivo("file.txt");
@@ -171,6 +219,5 @@ public class Lista {
         a.lerRegistros(this);
         a.closeFile();
         JOptionPane.showMessageDialog(null, "Lista importada com sucesso!");
-        this.imprimir();
     }
 }

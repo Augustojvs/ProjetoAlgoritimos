@@ -1,6 +1,5 @@
 package projetoalgoritimos;
 
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -36,8 +35,8 @@ public class frmLista extends javax.swing.JFrame {
         jTextFieldEndereco1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         TabelaPrincipal = new javax.swing.JTable();
+        btnCarregar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
-        btnSalvar1 = new javax.swing.JButton();
         jButtonInserir1 = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         jButtonUltimo = new javax.swing.JButton();
@@ -120,19 +119,19 @@ public class frmLista extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(TabelaPrincipal);
 
-        btnSalvar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btnSalvar.setText("Carregar Lista");
-        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+        btnCarregar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnCarregar.setText("Carregar Lista");
+        btnCarregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarActionPerformed(evt);
+                btnCarregarActionPerformed(evt);
             }
         });
 
-        btnSalvar1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btnSalvar1.setText("Exportar Lista");
-        btnSalvar1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnSalvar.setText("Exportar Lista");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvar1ActionPerformed(evt);
+                btnSalvarActionPerformed(evt);
             }
         });
 
@@ -219,9 +218,9 @@ public class frmLista extends javax.swing.JFrame {
                         .addComponent(btnPesquisar)
                         .addGap(8, 8, 8))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnSalvar)
+                        .addComponent(btnCarregar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSalvar1)
+                        .addComponent(btnSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonInserir1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -254,8 +253,8 @@ public class frmLista extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExcluir)
                     .addComponent(jButtonInserir1)
-                    .addComponent(btnSalvar1)
-                    .addComponent(btnSalvar))
+                    .addComponent(btnSalvar)
+                    .addComponent(btnCarregar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonPrimeiro)
@@ -313,6 +312,7 @@ public class frmLista extends javax.swing.JFrame {
         endereco = jTextFieldEndereco.getText();
 
         l.inserirNoFim(nome, codigo, endereco);
+        JOptionPane.showMessageDialog(null, "Cliente Inserido com Sucesso!");
 
         DefaultTableModel dtmCliente = (DefaultTableModel) TabelaPrincipal.getModel();
         Object[] dados = {codigo, nome, endereco};
@@ -426,6 +426,8 @@ public class frmLista extends javax.swing.JFrame {
                         dtmCliente.removeRow(i);
                     }
                 }
+                
+                l.exportarLista();
 
                 jButtonProximo.setEnabled(true);
                 jButtonUltimo.setEnabled(true);
@@ -441,7 +443,7 @@ public class frmLista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+    private void btnCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarActionPerformed
         DefaultTableModel dtmCliente = (DefaultTableModel) TabelaPrincipal.getModel();
         if (dtmCliente.getRowCount() > 0) {
             for (int i = dtmCliente.getRowCount() - 1; i > -1; i--) {
@@ -453,13 +455,25 @@ public class frmLista extends javax.swing.JFrame {
         jTextFieldEndereco.setText("");
         l.esvaziar();
         l.importarLista();
-//        for(Cliente c: l)
+        exibeCliente(l.primeiro());
+        Tipono aux = l.getPosAtual();
+        boolean hasNext = true;
+        while(hasNext){
+            Object[] dados = {aux.getCodigo(), aux.getNome(), aux.getEndereco()};
+            dtmCliente.addRow(dados);
+            if(aux.proximo == null){
+                hasNext = false;
+            } else {
+                aux = aux.proximo;
+            }
+        }
 
-    }//GEN-LAST:event_btnSalvarActionPerformed
+    }//GEN-LAST:event_btnCarregarActionPerformed
 
-    private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar1ActionPerformed
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         l.exportarLista();
-    }//GEN-LAST:event_btnSalvar1ActionPerformed
+        JOptionPane.showMessageDialog(null, "Lista exportada com sucesso!");
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
@@ -522,10 +536,10 @@ public class frmLista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TabelaPrincipal;
+    private javax.swing.JButton btnCarregar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton btnSalvar1;
     private javax.swing.JButton jButtonAnterior;
     private javax.swing.JButton jButtonInserir1;
     private javax.swing.JButton jButtonPrimeiro;

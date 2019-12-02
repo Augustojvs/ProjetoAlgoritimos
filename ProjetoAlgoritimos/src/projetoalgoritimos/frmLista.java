@@ -331,13 +331,13 @@ public class frmLista extends javax.swing.JFrame {
     private void jButtonUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUltimoActionPerformed
 
         if (l.vazia()) {
-            jButtonProximo.setEnabled(false);
-            jButtonUltimo.setEnabled(false);
-            jButtonPrimeiro.setEnabled(false);
-            jButtonAnterior.setEnabled(false);
+//            jButtonProximo.setEnabled(false);
+//            jButtonUltimo.setEnabled(false);
+//            jButtonPrimeiro.setEnabled(false);
+//            jButtonAnterior.setEnabled(false);
             JOptionPane.showMessageDialog(rootPane, "Erro ao exibir dados!");
         } else {
-            exibeProduto(l.ultimo());
+            exibeCliente(l.ultimo());
             jButtonProximo.setEnabled(false);
             jButtonUltimo.setEnabled(false);
             jButtonPrimeiro.setEnabled(true);
@@ -345,7 +345,7 @@ public class frmLista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonUltimoActionPerformed
 
-    public void exibeProduto(Cliente p) {
+    public void exibeCliente(Cliente p) {
         if (p != null) {
             String nome = p.getNome();
             int codigo = p.getCodigo();
@@ -356,8 +356,8 @@ public class frmLista extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(rootPane, "posição inválida");
         }
-
     }
+    
     private void jButtonPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrimeiroActionPerformed
 
         if (l.vazia()) {
@@ -367,7 +367,7 @@ public class frmLista extends javax.swing.JFrame {
             jButtonAnterior.setEnabled(false);
             JOptionPane.showMessageDialog(rootPane, "Erro ao exibir dados!");
         } else {
-            exibeProduto(l.primeiro());
+            exibeCliente(l.primeiro());
             jButtonPrimeiro.setEnabled(false);
             jButtonAnterior.setEnabled(false);
             jButtonProximo.setEnabled(true);
@@ -385,7 +385,7 @@ public class frmLista extends javax.swing.JFrame {
             jButtonAnterior.setEnabled(false);
             JOptionPane.showMessageDialog(rootPane, "Erro ao exibir dados!");
         } else {
-            exibeProduto(l.anterior());
+            exibeCliente(l.anterior());
             jButtonProximo.setEnabled(true);
             jButtonUltimo.setEnabled(true);
             if (l.getAnterior() == null) {
@@ -404,7 +404,7 @@ public class frmLista extends javax.swing.JFrame {
             jButtonAnterior.setEnabled(false);
             JOptionPane.showMessageDialog(rootPane, "Erro ao exibir dados!");
         } else {
-            exibeProduto(l.proximo());
+            exibeCliente(l.proximo());
             jButtonPrimeiro.setEnabled(true);
             jButtonAnterior.setEnabled(true);
             if (l.getProximo() == null) {
@@ -415,24 +415,45 @@ public class frmLista extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonProximoActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int codigo = Integer.parseInt(jTextFieldCodigo.getText());
-        l.excluir(codigo);
-        JOptionPane.showMessageDialog(null, "Cliente código " + codigo + " removido com suceso!");
-        
-        jButtonProximo.setEnabled(true);
-        jButtonUltimo.setEnabled(true);
-        jButtonPrimeiro.setEnabled(true);
-        jButtonAnterior.setEnabled(true);
-        jTextFieldNome.setText("");
-        jTextFieldCodigo.setText("");
-        jTextFieldEndereco.setText("");
+        if(!jTextFieldCodigo.getText().equalsIgnoreCase("")){
+            int resp = JOptionPane.showConfirmDialog(rootPane, "Você gostaria de excluir o cliente " + jTextFieldNome.getText(), "Confirmar Exclusão", JOptionPane.YES_NO_OPTION);
+            if(resp == 0){
+                l.excluir();
+                
+                DefaultTableModel dtmCliente = (DefaultTableModel) TabelaPrincipal.getModel();
+                for(int i = 0 ; i < dtmCliente.getRowCount(); i++) {
+                    if((int) dtmCliente.getValueAt(i, 0) == Integer.parseInt(jTextFieldCodigo.getText())){
+                        dtmCliente.removeRow(i);
+                    }
+                }
 
-        l.imprimir();
-
+                jButtonProximo.setEnabled(true);
+                jButtonUltimo.setEnabled(true);
+                jButtonPrimeiro.setEnabled(true);
+                jButtonAnterior.setEnabled(true);
+                jTextFieldNome.setText("");
+                jTextFieldCodigo.setText("");
+                jTextFieldEndereco.setText("");
+                
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um cliente");
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        DefaultTableModel dtmCliente = (DefaultTableModel) TabelaPrincipal.getModel();
+        if (dtmCliente.getRowCount() > 0) {
+            for (int i = dtmCliente.getRowCount() - 1; i > -1; i--) {
+                dtmCliente.removeRow(i);
+            }
+        }
+        jTextFieldNome.setText("");
+        jTextFieldCodigo.setText("");
+        jTextFieldEndereco.setText("");
+        l.esvaziar();
         l.importarLista();
+//        for(Cliente c: l)
 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -453,7 +474,11 @@ public class frmLista extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldCodigoActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        // TODO add your handling code here:
+        if (jTextFieldEndereco1.getText().equals("")){
+           JOptionPane.showMessageDialog(rootPane, "informe um item para pequisar");
+        } else {
+            exibeCliente(l.localizarItem(jTextFieldEndereco1.getText()));
+        }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void jTextFieldEndereco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEndereco1ActionPerformed

@@ -1,5 +1,6 @@
 package projetoalgoritimos;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -45,6 +46,7 @@ public class frmLista extends javax.swing.JFrame {
         jButtonPrimeiro = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jComboCategoria = new javax.swing.JComboBox<>();
+        btVoltar1 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,6 +100,7 @@ public class frmLista extends javax.swing.JFrame {
 
         btnPesquisar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnPesquisar.setText("Pesquisar");
+        btnPesquisar.setToolTipText("pesquise um cliente pelo codigo ou nome");
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarActionPerformed(evt);
@@ -123,6 +126,7 @@ public class frmLista extends javax.swing.JFrame {
 
         btnCarregar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnCarregar.setText("Carregar Lista");
+        btnCarregar.setToolTipText("carregue a lista de clientes");
         btnCarregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCarregarActionPerformed(evt);
@@ -131,6 +135,7 @@ public class frmLista extends javax.swing.JFrame {
 
         btnSalvar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnSalvar.setText("Exportar Lista");
+        btnSalvar.setToolTipText("salve a lista de clientes");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
@@ -139,6 +144,7 @@ public class frmLista extends javax.swing.JFrame {
 
         jButtonInserir1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButtonInserir1.setText("Inserir");
+        jButtonInserir1.setToolTipText("insira um cliente novo");
         jButtonInserir1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonInserir1ActionPerformed(evt);
@@ -147,6 +153,7 @@ public class frmLista extends javax.swing.JFrame {
 
         btnExcluir.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnExcluir.setText("Excluir");
+        btnExcluir.setToolTipText("exclua um cliente pelo codigo");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
@@ -155,6 +162,7 @@ public class frmLista extends javax.swing.JFrame {
 
         jButtonUltimo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButtonUltimo.setText(">>");
+        jButtonUltimo.setToolTipText("vá ate o ultimo elemento da lista");
         jButtonUltimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonUltimoActionPerformed(evt);
@@ -163,6 +171,7 @@ public class frmLista extends javax.swing.JFrame {
 
         jButtonProximo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButtonProximo.setText(">");
+        jButtonProximo.setToolTipText("vá ate o proximo elemento da lista");
         jButtonProximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonProximoActionPerformed(evt);
@@ -171,6 +180,7 @@ public class frmLista extends javax.swing.JFrame {
 
         jButtonAnterior.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButtonAnterior.setText("<");
+        jButtonAnterior.setToolTipText("vá ate o elemento anterior da lista");
         jButtonAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAnteriorActionPerformed(evt);
@@ -179,6 +189,7 @@ public class frmLista extends javax.swing.JFrame {
 
         jButtonPrimeiro.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButtonPrimeiro.setText("<<");
+        jButtonPrimeiro.setToolTipText("vá ate o primeiro elemento da lista");
         jButtonPrimeiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPrimeiroActionPerformed(evt);
@@ -192,6 +203,15 @@ public class frmLista extends javax.swing.JFrame {
         jComboCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboCategoriaActionPerformed(evt);
+            }
+        });
+
+        btVoltar1.setBackground(new java.awt.Color(255, 255, 255));
+        btVoltar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/attention.jpeg"))); // NOI18N
+        btVoltar1.setToolTipText("informações do grupo");
+        btVoltar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVoltar1ActionPerformed(evt);
             }
         });
 
@@ -213,7 +233,9 @@ public class frmLista extends javax.swing.JFrame {
                             .addComponent(jTextFieldNome)
                             .addComponent(jTextFieldEndereco)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(15, 15, 15)
+                        .addComponent(btVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextFieldEndereco1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPesquisar)
@@ -252,7 +274,8 @@ public class frmLista extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnPesquisar)
-                    .addComponent(jTextFieldEndereco1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldEndereco1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -271,9 +294,9 @@ public class frmLista extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addGap(0, 6, Short.MAX_VALUE))
                     .addComponent(jComboCategoria))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExcluir)
                     .addComponent(jButtonInserir1)
@@ -531,6 +554,17 @@ public class frmLista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboCategoriaActionPerformed
 
+    private void btVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltar1ActionPerformed
+        ImageIcon icon = new ImageIcon("src/imagens/NERDVANA.png");
+        JOptionPane.showMessageDialog(rootPane, 
+            "AUGUSTO JUNIO.........................................RA: 318124765\n" +
+            "RODRIGO SILVA...........................................RA: 318128191\n" +
+            "GABRIEL HENRIQUE SOUZA PRADO.....RA: 318124505\n" +
+            "JOÃO MARCOS MENDES...........................RA: 318112368\n" +
+            "JOÃO PEDRO COELHO..............................RA: 318135934", 
+            "Projeto de Algoritmos", JOptionPane.INFORMATION_MESSAGE, icon);
+    }//GEN-LAST:event_btVoltar1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -568,6 +602,8 @@ public class frmLista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TabelaPrincipal;
+    private javax.swing.JButton btVoltar;
+    private javax.swing.JButton btVoltar1;
     private javax.swing.JButton btnCarregar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnPesquisar;
